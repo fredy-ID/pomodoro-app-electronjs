@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc && copyfiles -f src/index.html build",
-    "start": "npm run compile && electron"
+    "start": "npm run compile && electron ./build/main.js"
   },
   "keywords": [
     "Pomodoro"

@@ -1,9 +1,7 @@
-import { app, BrowserWindow } from "electron";
+const { app, BrowserWindow } = require('electron/main')
 import * as path from "path";
 
-app.on("ready", () => {
-  console.log("App is ready");
-
+const createWindow = () => {
   const win = new BrowserWindow({
     width: 600,
     height: 400,
@@ -15,5 +13,17 @@ app.on("ready", () => {
     .then(() => {
       // IMPLEMENT FANCY STUFF HERE
     })
-    .catch((e) => console.error(e));
+    .catch((e: any) => console.error(e));
+}
+app.on('ready', () => {
+  console.log("App is ready");
+  createWindow()
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
 });
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit()
+})

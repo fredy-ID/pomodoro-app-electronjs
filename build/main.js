@@ -23,11 +23,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var electron_1 = require("electron");
+var _a = require('electron/main'), app = _a.app, BrowserWindow = _a.BrowserWindow;
 var path = __importStar(require("path"));
-electron_1.app.on("ready", function () {
-    console.log("App is ready");
-    var win = new electron_1.BrowserWindow({
+var createWindow = function () {
+    var win = new BrowserWindow({
         width: 600,
         height: 400,
     });
@@ -38,4 +37,16 @@ electron_1.app.on("ready", function () {
         // IMPLEMENT FANCY STUFF HERE
     })
         .catch(function (e) { return console.error(e); });
+};
+app.on('ready', function () {
+    console.log("App is ready");
+    createWindow();
+    app.on('activate', function () {
+        if (BrowserWindow.getAllWindows().length === 0)
+            createWindow();
+    });
+});
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin')
+        app.quit();
 });
