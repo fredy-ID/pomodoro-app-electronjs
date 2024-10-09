@@ -1,9 +1,7 @@
 {
-    "compilerOptions": {
-        "target": "es5",         
-        "module": "commonjs",    
-        "strict": true,          
-        "esModuleInterop": true,    
-        "outDir": "./build"
-    }
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }
